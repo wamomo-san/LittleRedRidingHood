@@ -115,7 +115,7 @@ public class Player : MonoBehaviour {
     // 壁キックとずり落ち
     void HandleWallSliding()
     {
-        rb2d.velocity = new Vector2(rb2d.velocity.x, -0.5f);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, -1.5f);
 
         wallSliding = true;
 
@@ -123,11 +123,11 @@ public class Player : MonoBehaviour {
         {
             if (facingRight)
             {
-                rb2d.AddForce(new Vector2(-2, 1) * jumpPower);
+                rb2d.AddForce(new Vector2(-4, 1) * jumpPower);
             }
             else
             {
-                rb2d.AddForce(new Vector2(2, 1) * jumpPower);
+                rb2d.AddForce(new Vector2(4, 1) * jumpPower);
             }
         }
     }
@@ -213,7 +213,14 @@ public class Player : MonoBehaviour {
         {
             timer += Time.deltaTime;
 
-            rb2d.AddForce(new Vector3(knockbackDir.x  * -100, knockbackDir.y * knockbackPwr, transform.position.z));
+            if (facingRight)
+            {
+                rb2d.AddForce(new Vector3(knockbackDir.x * -100, knockbackDir.y * knockbackPwr, transform.position.z));
+            }
+            else
+            {
+                rb2d.AddForce(new Vector3(knockbackDir.x * 100, knockbackDir.y * knockbackPwr, transform.position.z));
+            }
         }
 
         yield return 0;

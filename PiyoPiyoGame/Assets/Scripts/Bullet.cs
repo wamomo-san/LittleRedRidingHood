@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour {
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
 
@@ -18,11 +18,12 @@ public class Bullet : MonoBehaviour {
         {
             if (col.CompareTag("Player"))
             {
-                col.GetComponent<Player>().Damage(1);
-                StartCoroutine(player.Knockback(0.02f, 50, player.transform.position));
+                //col.GetComponent<Player>().Damage(1);
+                //StartCoroutine(player.Knockback(0.02f, 50, player.transform.position));
             }
 
-            Invoke("DestroyObj", 0.5f);
+            // n 秒後に消滅する
+            Invoke("DestroyObj", 0.7f);
         }
     }
 

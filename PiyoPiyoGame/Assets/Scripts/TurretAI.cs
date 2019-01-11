@@ -13,7 +13,7 @@ public class TurretAI : MonoBehaviour
     public float distance;
     public float wakeRange;
     public float shootInterval;
-    public float bulletSpeed = 100;
+    public float bulletSpeed = 300;
     public float bulletTimer;
 
     // Booleans
@@ -85,8 +85,10 @@ public class TurretAI : MonoBehaviour
             {
                 GameObject bulletClone;
                 bulletClone = Instantiate(bullet, shootPointLeft.transform.position, shootPointLeft.transform.rotation) as GameObject;
-                bulletClone.GetComponent<Rigidbody2D>().velocity = direction * -bulletSpeed;
+                Rigidbody2D bc = bulletClone.GetComponent<Rigidbody2D>();
 
+                // bulletClone.GetComponent<Rigidbody2D>().velocity = direction * -bulletSpeed;
+                bc.AddForce(new Vector2(direction.x * -bulletSpeed, direction.y * bulletSpeed * 1.5f));
                 bulletTimer = 0;
             }
 
@@ -94,7 +96,10 @@ public class TurretAI : MonoBehaviour
             {
                 GameObject bulletClone;
                 bulletClone = Instantiate(bullet, shootPointRight.transform.position, shootPointRight.transform.rotation) as GameObject;
-                bulletClone.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+                Rigidbody2D bc = bulletClone.GetComponent<Rigidbody2D>();
+
+                // bulletClone.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+                bc.AddForce(new Vector2(direction.x * bulletSpeed, direction.y * bulletSpeed * 1.5f));
 
                 bulletTimer = 0;
             }
